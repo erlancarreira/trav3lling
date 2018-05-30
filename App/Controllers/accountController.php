@@ -124,25 +124,26 @@ class AccountController extends Controller
 
       $this->data['Places'] = $this->Places->getPosts($id_post , $_SESSION['user']);
 
+      $this->data['msgteste'] = $this->Places->checkPrimary($id_post);
       
       if ($this->DataPost = filter_input_array(INPUT_POST, FILTER_DEFAULT)) {    
 
-        if (isset($_FILES['photo']) && !empty($_FILES['photo']['tmp_name'])) {
+        // if (isset($_FILES['photo']) && !empty($_FILES['photo']['tmp_name'])) {
         
         
        
-        $id_photo = $this->DataPost['photo'];  
+        // $id_photo = $this->DataPost['photo'];  
        
-        // var_dump($_FILES['photo'], $id_photo);
+        // // var_dump($_FILES['photo'], $id_photo);
 
-        // die;
+        // // die;
                  
           
-          $this->Places->uploadImg($this->DataPost['id_photo']);
+        //   $this->Places->uploadImg($this->DataPost['id_photo']);
 
-          // $this->Places->checkImg($id_foto, $array);
+        //   // $this->Places->checkImg($id_foto, $array);
 
-        }        
+        // }        
 
         //   if(!$this->Places->verifyImg($images, $id_foto)){
 

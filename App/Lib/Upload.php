@@ -217,10 +217,6 @@ class Upload {
      */
     private function setFile($name_file, $file = null) {
         $this->file = $_FILES[$name_file];
-        
-       
-        print_r($this->file);
-
         if ($file != null) {
             if (in_array('', $this->file['tmp_name'])) {
                 $this->error = "Escolha o(s) arquivo(s) " . implode(' - ', $this->allowed) . " para upload";

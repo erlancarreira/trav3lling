@@ -15,7 +15,7 @@ $(document).ready(function(){
     if (element.target.value) fileName = element.target.value.split('\\').pop();
       fileName ? $label.addClass('has-file').find('.js-fileName').html(fileName) : $label.removeClass('has-file').html(labelVal);
       
-console.log($('.img-replace').attr('src'));
+// console.log($('.img-replace').attr('src'));
       
 
 $($input).each(function(index) {
@@ -28,9 +28,11 @@ $($input).each(function(index) {
        
       alert('Cliquei');
         
-        data.append('insert', $(this).data('id'));
+        data.append('insert', $(this).data('id-post'));
         data.append('photo', $(this).data('id'));
         data.append('photo', arquivo[0]);
+
+        console.log(data);
 
         $.ajax({
           type:'POST',
@@ -62,6 +64,70 @@ $($input).each(function(index) {
   });   
  });
 
+let $doc = $('html, body');
+let menuHeight = $('.menu-swix').innerHeight();
+$('.scrollSuave').click(function() {
+    $doc.animate({
+        scrollTop: $( $.attr(this, 'href') ).offset().top - menuHeight
+    }, 1000);
+    return false;
+});
+
+$(document).ready(function() {
+  var appointments = new Array();
+  loadCalendar();
+
+  function loadCalendar() {
+    $.ajax({
+      url: BASE+"ajax/events",
+      type: "GET",
+      dataType: "json",
+      success: function(data) {
+        $.each(data, function(index, item) {
+          appointments.push(item);
+        });
+
+        $("#calendar").fullCalendar({
+          displayEventEnd: true,
+          
+          events: appointments
+        });
+
+        
+      },
+      error: function(errObj, textStatus, errorThrown) {
+        console.log(errObj, textStatus, errorThrown);
+      }
+    });
+  }
+});  
+
+$(function() {
+
+  // page is now ready, initialize the calendar...
+
+  $('#calendar').fullCalendar({
+    header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                selectable: true,
+                selectHelper: true,
+
+            defaultDate: new Date(2016, 4, 20)
+ 
+
+  });
+
+});
+
+$('#chatScroll').each(function() {
+  const chatHeight = $(this).innerHeight();
+  if(chatHeight > 500) 
+    $(this).addClass('chatScroll');
+  console.log(chatHeight); 
+});
 // (function() {
   
 //   'use strict';

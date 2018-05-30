@@ -1,13 +1,12 @@
 <section class="container py-5">
    <?php  if(!empty($_SESSION['msg'])): ?>
-   <div class="col">
+    <div class="col">
       <div class="alert alert-warning my-0 border-0" role="alert"><?= $_SESSION['msg']; ?>       
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
            <span aria-hidden="true">&times;</span>
-        </button>
-        
+        </button>  
       </div>
-   </div>
+    </div>
    <?php endif; ?>
   
   <div class="row" style="background-color: #e0ffff3d;">

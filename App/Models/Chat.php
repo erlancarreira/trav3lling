@@ -191,7 +191,7 @@ class Chat extends Model {
     {
         $array = array();
 
-        $sql = "SELECT U.id, U.name, U.email, U.url, R.cr_id, R.c_id_fk, R.id_post, R.date_time, R.reply, R.user_id_fk FROM conversation_reply R, users U WHERE R.c_id_fk = :c_id AND R.user_id_fk = U.id ORDER BY R.cr_id ASC";
+        $sql = "SELECT U.id, U.name, U.email, U.url, R.cr_id, R.c_id_fk, R.id_post, R.date_time, R.reply, R.user_id_fk FROM conversation_reply R, users U WHERE R.c_id_fk = :c_id AND R.user_id_fk = U.id ORDER BY R.cr_id DESC";
 
         $sql = $this->db->prepare($sql);
 

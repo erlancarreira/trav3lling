@@ -8,6 +8,8 @@
   <link href="<?= BASE; ?>App/assets/css/main.css" rel="stylesheet">
   <link href="<?= BASE; ?>App/assets/css/jquery.toast.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css" >
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.print.css">
   <link href="https://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">
   <link rel="icon" href="<?= BASE; ?>App/assets/img/icon-swix-64.png">
   <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
@@ -54,11 +56,11 @@
 </head>
 <body >
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top box-shadow py-2 menu-swix d-flex justify-content-between">
+  <nav class="navbar navbar-expand-lg navbar-light bg-home fixed-top py-2 menu-swix d-flex justify-content-between">
     <div class="container">
       <div class="logotipo d-flex align-items-center">
         <a class="navbar-brand bg-gradient-primary font-weight-bold" href="<?= BASE; ?>">
-          <img src="<?= BASE; ?>App/assets/img/swix-logo.png" style="width: 200px;">
+          <img src="<?= BASE; ?>App/assets/img/trav3lling_logo.png" style="width: 200px;">
         </a>
       </div>
       <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir Navegação">
@@ -202,28 +204,98 @@
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="<?= BASE; ?>App/assets/js/jquery.expander.min.js"></script>
+<script type="text/javascript" src="<?= BASE; ?>App/assets/js/jquery.expander.min.js"></script> 
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+    integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
+    crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/i18n/en.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js
+"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
 
-
-   <!-- <script type="text/javascript" src="<?// BASE; ?>App/assets/js/jquery-3.3.1.min.js"></script> 
-    <script type="text/javascript" src="<?// BASE; ?>App/assets/js/bootstrap.min.js"></script> 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script> 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>-->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwCO10-iR4RRUngcqP_m1J47pf-3WdWqM" async defer></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwCO10-iR4RRUngcqP_m1J47pf-3WdWqM" async defer></script> -->
     <script type="text/javascript" src="<?= BASE; ?>App/assets/js/app.js"></script>  
-    <script type="text/javascript">var BASE = '<?php echo BASE; ?>';</script>
-    <script src="<?= BASE; ?>App/assets/js/jquery.toast.js"></script>
-
-    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
-    integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
-    crossorigin="anonymous"></script>
+    <script type="text/javascript">const BASE = '<?= BASE; ?>';</script>
+    <!-- <script src="<?// BASE; ?>App/assets/js/jquery.toast.js"></script> -->
 
     
+
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+    // var calendar = $('#calendar').fullCalendar('getCalendar'); calendar.next();
+    // $('#calendar').fullCalendar({
+    // header: {
+    //     left: 'prev,next today',
+    //     center: 'title',
+    //     right: 'month,agendaWeek,agendaDay,listWeek'
+    //   },
+    //   defaultDate: '2018-03-12',
+    //   navLinks: true, // can click day/week names to navigate views
+    //   editable: true,
+    //   eventLimit: true, // allow "more" link when too many events
+    //   events: [
+    //     {
+    //       title: 'All Day Event',
+    //       start: '2018-03-01',
+    //     },
+    //     {
+    //       title: 'Long Event',
+    //       start: '2018-03-07',
+    //       end: '2018-03-10'
+    //     },
+    //     {
+    //       id: 999,
+    //       title: 'Repeating Event',
+    //       start: '2018-03-09T16:00:00'
+    //     },
+    //     {
+    //       id: 999,
+    //       title: 'Repeating Event',
+    //       start: '2018-03-16T16:00:00'
+    //     },
+    //     {
+    //       title: 'Conference',
+    //       start: '2018-03-11',
+    //       end: '2018-03-13'
+    //     },
+    //     {
+    //       title: 'Meeting',
+    //       start: '2018-03-12T10:30:00',
+    //       end: '2018-03-12T12:30:00'
+    //     },
+    //     {
+    //       title: 'Lunch',
+    //       start: '2018-03-12T12:00:00'
+    //     },
+    //     {
+    //       title: 'Meeting',
+    //       start: '2018-03-12T14:30:00'
+    //     },
+    //     {
+    //       title: 'Happy Hour',
+    //       start: '2018-03-12T17:30:00'
+    //     },
+    //     {
+    //       title: 'Dinner',
+    //       start: '2018-03-12T20:00:00'
+    //     },
+    //     {
+    //       title: 'Birthday Party',
+    //       start: '2018-03-13T07:00:00'
+    //     },
+    //     {
+    //       title: 'Click for Google',
+    //       url: 'http://google.com/',
+    //       start: '2018-03-28'
+    //     }
+    //   ]
+    // });
+  });
+  </script>  
     
     <script type="text/javascript">
       $(document).ready(function(){

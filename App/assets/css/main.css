@@ -6,7 +6,7 @@ html {
 }
 body {
     /* Margin bottom by footer height */
-    padding-top: 60px;
+    padding-top: 80px;
     display: flex;
     min-height: 100vh;
     flex-direction: column;
@@ -281,6 +281,10 @@ button.navbar-toggler {
     border-radius: 0;
 }
 
+.bg-home {
+    background-color: #e2e2e2; 
+}
+
 .input-am label {
     color: #fff;
     cursor: pointer;
@@ -333,4 +337,9 @@ button.navbar-toggler {
       }
     }
   }
+}
+
+.chatScroll {
+   height: 500px; 
+   overflow-y: scroll;  
 }

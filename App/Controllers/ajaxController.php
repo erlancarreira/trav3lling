@@ -124,16 +124,28 @@ class AjaxController extends Controller {
   public function updateImage() 
   {
     if (isset($_FILES['photo']) && !empty($_FILES['photo']['tmp_name'])) {
-      
-      print_r($_POST['insert']);  
-        if($_POST['photo']) {
-          $this->Places->uploadImg($_POST['photo']);
-        } else {
+        
+        $this->Places->checkPrimary($_POST['photo']);
+             
+        if(isset($_POST['insert']) && !empty($_POST['insert'])) {
+        
           $this->Places->uploadImg($_POST['insert']);
+        
+        } 
+
+        if(isset($_POST['photo']) && !empty($_POST['photo'])) {
+          
+          $this->Places->uploadImg($_POST['photo']);
         }   
-      }     
-  }
-    
+      } 
+  }    
+
+    public function events() 
+    {
+
+      $this->data['totalDays'] = $this->Places->getDays($id);
+
+    }         
 
 
 }

@@ -25,6 +25,19 @@ class Controller {
         return $this->msg;
     }
 
+    public function objDate($val) {
+
+        // Instancia o objeto DateTime com o formato recebido, dito, original
+        $objDate = \DateTime::createFromFormat('Y-m-d H:i:s', $val);
+
+        return $data = $objDate->format('d-m-Y');
+        
+        $hora = $objDate->format('H:i:s');
+
+
+    }
+
+
     public function selected($value, $selected) {
          
         return $value == $selected ? ' selected="selected"' : '';

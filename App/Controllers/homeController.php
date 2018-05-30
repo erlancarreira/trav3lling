@@ -6,12 +6,13 @@ use App\Core\Controller;
 use App\Models\Users;
 
 class homeController extends Controller {
-
+    
+    private $User;
     
     public function __construct() {
     	parent::__construct();
     	$this->User = new Users();
-    	//$u->verifyLogin();
+    	// $this->User->verifyLogin();
 
     }
 

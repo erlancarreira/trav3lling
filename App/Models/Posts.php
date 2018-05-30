@@ -12,6 +12,7 @@ class Posts extends Model
   private $msg;
   private $File;
   private $Upload;
+  private $Images;
 
   public function getPlaces($id_user) 
   {
@@ -189,7 +190,7 @@ public function getMsg() {
 
 public function getImages($id_post) {
 
-  $sql = "SELECT * FROM images_pl WHERE id_post = '$id_post' LIMIT 5"; 
+  $sql = "SELECT * FROM images_pl WHERE id_post = '$id_post' LIMIT 6"; 
 
   $sql = $this->db->query($sql);
 
@@ -283,6 +284,31 @@ public function getCategoryId($id_category) {
 
    return $array = $sql->fetch(\PDO::FETCH_ASSOC); 
  }
+}
+
+public function getEvent($id_post, $id_user) {
+  
+  // print_r($id_post, $id_user);
+
+  // exit();
+  
+  $sql = "SELECT * FROM events_pl WHERE id_post = :id_post AND id_user = :id_user"; 
+  
+  $sql = $this->db->prepare($sql);
+
+  $sql->bindValue(":id_post", $id_post);
+
+  $sql->bindValue(":id_user", $id_user);
+
+ 
+  $sql->execute();
+  if ($sql->rowCount() > 0) {
+
+
+
+    return $array = $sql->fetchAll(\PDO::FETCH_ASSOC); 
+  
+  }
 }
 
 
@@ -544,27 +570,105 @@ public function setDays($id_post, $min_days, $max_days) {
  $sql = $this->db->query($sql);
 } 
 
+public function insertImg($image, $id_post) {    
+
+    $sql = "INSERT INTO images_pl (url, id_post) VALUES (:image, :id_post)";
+
+    $sql = $this->db->prepare($sql);
+
+    $sql->bindValue(":image", $image);  
+
+    $sql->bindValue(":id_post", $id_post); 
+
+    
+  try {
+      $sql->execute();
+      
+      if ($sql->rowCount() > 0) {   
+      
+        return true; 
+
+    } else {
+
+        return $this->msg;
+        
+      } 
+
+  } catch (PDOException $e) {
+         die($e->getMessage());
+    
+    }
+   
+
+
+
+} 
+
+public function setEvent($check_in, $check_out, $id_post, $id_user) {
+  
+  $sql = "INSERT INTO events_pl (check_in, check_out, id_post, id_user) VALUES (:check_in, :check_out, :id_post, :id_user)";
+
+    $sql = $this->db->prepare($sql);
+
+    $sql->bindValue(":check_in", $check_in); 
+
+    $sql->bindValue(":check_out", $check_out); 
+
+    $sql->bindValue(":id_post", $id_post);  
+
+    $sql->bindValue(":id_user", $id_user); 
+    
+  try {
+
+    $sql->execute();
+      
+      if ($sql->rowCount() > 0) {   
+      
+        return true; 
+
+      } else {
+
+        return $this->msg;
+        
+      } 
+
+  } catch (PDOException $e) {
+         die($e->getMessage());
+    
+    }    
+}
+
 /*-------------------------------------UPDATE-------------------------------------------------*/  
 
 public function uploadImg($id) { 
   
-  $Upload = new Upload();
+  $Upload = new Upload(); 
 
   try {
          
       if (isset($_FILES['photo']) && !empty($_FILES['photo']) && isset($id)) {
 
           $Upload->set()
-                  ->jpeg() //engloba os mimes (jpeg,jpg,pjeg)
-                  ->png()  //engloba os mimes (png,x-png) 
-                  ->path("App/assets/img/account/places/")
+                 ->jpeg() //engloba os mimes (jpeg,jpg,pjeg)
+                 ->png()  //engloba os mimes (png,x-png) 
+                 ->path("App/assets/img/account/places/")
                  
-                  ->moveFile('photo');
+                 ->moveFile('photo');
 
           if (!$Upload->getErros()) {
 
-            self::updateImg($Upload->getNameFile(), $id);
-          
+             if (isset($_POST['photo']) && !empty($_POST['photo'])){
+
+              self::updateImg($Upload->getNameFile(), $_POST['photo']);
+            
+            }
+            
+            if(isset($_POST['insert']) && !empty($_POST['insert'])) {
+              
+              self::insertImg($Upload->getNameFile(), $_POST['insert']);
+              
+            } 
+
           } else {
             echo $Upload->getErros();
           }
@@ -600,15 +704,45 @@ public function checkImg($id_foto, array $photos) {
     }  
 }
 
-public function updateImg($image, $id_foto) {    
+public function checkPrimary($id_photo) 
+{
 
-      $sql = "UPDATE images_pl SET url = :image WHERE id = :id_foto";
+  $sql = "SELECT * FROM images_pl WHERE id_post = :id_photo";
+
+      $sql = $this->db->prepare($sql);  
+
+      $sql->bindValue(":id_photo", $id_photo); 
+
+      try {
+      $sql->execute();
+      
+      if ($sql->rowCount() > 0) {   
+      
+        return print_r($sql->fetchAll(\PDO::FETCH_ASSOC)[0]); 
+        // return $array = $sql->fetchAll(); 
+
+
+    } else {
+
+        return $this->msg;
+        
+      } 
+
+  } catch (PDOException $e) {
+         die($e->getMessage());
+    
+    }
+}
+
+public function updateImg($image, $id_photo) {    
+
+      $sql = "UPDATE images_pl SET url = :image WHERE id = :id_photo";
 
       $sql = $this->db->prepare($sql);
 
       $sql->bindValue(":image", $image);  
 
-      $sql->bindValue(":id_foto", $id_foto); 
+      $sql->bindValue(":id_photo", $id_photo); 
 
     
   try {
@@ -628,7 +762,8 @@ public function updateImg($image, $id_foto) {
          die($e->getMessage());
     
     }
-   
+  
+
 
 
 

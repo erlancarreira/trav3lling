@@ -22,6 +22,18 @@ class Helps
   
   }
 
+  public static function objDate($val, $data) {
+
+    // Instancia o objeto DateTime com o formato recebido, dito, original
+    $objDate = DateTime::createFromFormat('Y-m-d H:i:s', $val);
+
+    return $data = $objDate->format('Y-m-d');
+    
+    $hora = $objDate->format('H:i:s');
+
+
+  }
+
   public static function getDays($key) {
       
       $date = new \DateTime('w');

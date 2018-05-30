@@ -14,7 +14,7 @@
 						<div class="carousel-caption">
 							<h2 class="h4">Travel Everywhere For Free</h2>  
 							<p class="lead">With trav3lling you reduce your travel costs by ... 100%!</p>
-							<a href="#" class="btn btn-sm btn-primary">Learn more about trav3lling</a>
+							<a href="#travelling" class="scrollSuave btn btn-sm btn-primary">Learn more about trav3lling</a>
 						</div>
 					</div>
 					<div class="carousel-item">
@@ -33,7 +33,7 @@
 						<div class="carousel-caption">
 							<h2 class="h4">You´re not what you know. You are what you do with what you know.</h2>  
 							<p class="lead">Trav3lling to the place of your dreams.</p>
-							<a href="#" class="btn btn-sm btn-primary">Go to first step</a>
+							<a href="<?= BASE; ?>account" class="btn btn-sm btn-primary">Go to first step</a>
 						</div>
 					</div>
 				</div>
@@ -54,10 +54,9 @@
 	</div>
 
 </section>
-
-<section class="bg-light text-center">
+<section id="travelling" class="bg-light text-center" >
 	<div class="container">
-		<div class="py-5 col-md-12 mx-auto">
+		<div class="py-5 col-md-12 mx-auto" >
 			<h2 class="display-4"> 
 				How we work
 			</h2>  
@@ -102,7 +101,7 @@
 						<h4 class="card-title">First Step almost completed</h4>
 						<p>Now start to personalize your profile</p>  
 						<div class="card-text text-white ">
-							<a href="<?= BASE; ?>account" class="btn-md btn btn-secondary">Account</a>
+							<a href="<?= (isset($_SESSION['user']) && !empty($_SESSION['user'])) ? BASE.'account' : BASE.'register'; ?>" class="btn-md btn btn-secondary">Account</a>
 						</div>
 					</div>
 				</div> 
@@ -117,7 +116,7 @@
 					<h4 class="card-title">First Step almost completed</h4>
 					<p>Choose your destination, it can be everywhere</p>  
 					<div class="card-text text-white ">
-						<a href="<?= BASE; ?>search" class="btn-md btn btn-secondary">Search</a>
+						<a href="<?= (isset($_SESSION['user']) && !empty($_SESSION['user'])) ? BASE.'search' : BASE.'register'; ?>" class="btn-md btn btn-secondary">Search</a>
 					</div>
 				</div>      
 			</div>
@@ -130,7 +129,7 @@
 					<h4 class="card-title">First Step almost completed</h4>
 					<p>Talk with the owner of the house about the details of the travel and be happy!</p>  
 					<div class="card-text text-white "> 
-						<a href="<?= BASE; ?>inbox" class="btn-md btn btn-secondary">Chat</a>
+						<a href="<?= (isset($_SESSION['user']) && !empty($_SESSION['user'])) ? BASE.'inbox' : BASE.'register'; ?>" class="btn-md btn btn-secondary">Chat</a>
 					</div>
 				</div>
 			</div>

@@ -49,29 +49,49 @@ class yoursubscribesController extends Controller
         $id_user = $value['id_user'];
         
         !$this->data['userPhone'] = $this->relations->getPhone($id_user);
-        
-        $places[] = ($this->Places->getPosts($id, $id_user));
 
+        !$this->data['dataEvent'] = $this->Places->getEvent($id, $_SESSION['user']);
+        
+        $places[] = $this->Places->getPosts($id, $id_user);
                 
         }
-   // }
-      //  var_dump( Helps::recursive_show_array($places) );
 
-
-        $this->data['Places'] = $places;   
+        $this->data['Places'] = $places;          
+       
     }
-
-     
-  //  var_dump($this->data['Places']);
-                //$var = $this->Places->getPosts($this->data['getSubs'][$i]['id']); 
+    
+    if ($this->relations->getMySubs()) { 
+      foreach ($this->relations->getMySubs() as $key) {
 
            
+        $id = $key['id'];
+        $id_user = $key['id_user'];
         
-      // $this->data['Places'] = $this->Places->getPosts($id_post, $id_user);
+        !$this->data['MyUserPhone'] = $this->relations->getPhone($id_user);
+        
+        $mySubs[] = $this->Places->getPosts($id, $id_user);
+            
+      }
+      
+      $this->data['MySubs'] = $mySubs;  
+    }    
+    
+    if(isset($_POST['check_in']) && !empty($_POST['check_in']) && isset($_POST['check_out']) && !empty($_POST['check_out'])) {
+         
+      $check_in = $_POST['check_in'];
+      $check_out = $_POST['check_out'];
+      $id_post = $_POST['id_post'];
+      $id_user = $_POST['id_user'];
 
-   
-  //  var_dump($this->relations->getIdsSubs($_SESSION['user']));  
-   
+      if($this->Places->setEvent($check_in, $check_out, $id_post, $id_user)) {
+         
+        $_SESSION['msg'] = "Data inserida com sucesso!"; 
+      
+      }  
+
+    }   
+
+
         
       
 

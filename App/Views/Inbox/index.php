@@ -13,7 +13,7 @@
      </div>
      <?php unset($_SESSION['msg']); endif; ?>
      <form method="POST">
-      <div class="card panel-info">
+      <div class="card panel-info my-3">
         <div class="card-header bg-primary ">
           <h5 class="text-white">Welcome to chat!</h5>
         </div>     
@@ -23,18 +23,18 @@
         <ul class="m-0 p-0" role="tablist">
           <?php if (!empty($listMsg)): ?> 
               
-            <li class="media ">
+            <li class="media">
               <div class="col">
                 <div class="row"> 
                 <?= $this->loadView('inbox/aside', $viewData);  ?>             
-                  <div class="col-md-8 p-0" data-spy="scroll" data-target="#navbar-swix" data-offset="20" class="scrollspy-example"> 
+                  <div class="col-md-8 p-0" id="chatScroll" data-spy="scroll" data-target="#navbar-swix" data-offset="20" class="scrollspy-example"> 
               <?php foreach ($listMsg as $key => $value) { ?> 
 
-                    <div class="clearfix <?= ($value['user_id'] !== $_SESSION['user'] ? 'bg-light' : ''); ?> col p-3">       
-                      <a class="<?= ($value['user_id'] == $_SESSION['user'] ? 'float-right' : 'float-left'); ?> mr-3" href="#">
+                    <div class="clearfix <?= ($value['user_id'] == $_SESSION['user'] ? 'bg-light' : ''); ?> col p-3">       
+                      <a class="<?= ($value['user_id'] == $_SESSION['user'] ? 'float-left' : 'float-right'); ?> mr-3" href="#">
                         <img style="width: 64px; height: 64px; text-decoration-style: none !important;" class="rounded-circle" src="<?= BASE; ?>App/assets/img/users/<?= ($_SESSION['user'] == $value['user_id'] ? $viewData['url'] : $value['user_img']); ?>" />
                       </a>
-                      <div class="col-md-10 <?= ($_SESSION['user'] == $value['user_id'] ? 'float-left' : 'float-right'); ?> py-2">     
+                      <div class="col-md-10 <?= ($_SESSION['user'] == $value['user_id'] ? 'float-right' : 'float-left'); ?> py-2">     
                         <div class="media-body">
                          <p class="p-0 m-0"><?= $value['message']; ?></p>  
                        </div>    

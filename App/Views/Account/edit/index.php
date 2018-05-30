@@ -11,6 +11,10 @@
 	    </div>
    <?php endif; ?>
 
+   <?php if (!empty($msgteste)) {
+      print_r($msgteste);
+   } ?>
+
             
   
               <?php if(!empty($Places)): ?>
@@ -30,19 +34,26 @@
 	                       	
 	              
 		                <?php if (count($listar['img_slider']) > 0): ?>
-		                      	     
-		                    <?php foreach ($listar['img_slider'] as $key => $value): ?> 
+		                  
+                      <?php
+                        
+                        $total = count($listar['img_slider']); 
+                        $offset = 6 - $total; 
+                            
+                      ?> 	     
+		                    
+                        <?php for($i=0; $i < $total; $i++): ?>  
 		                        
 		                                           	     	                       	                        
 		                        <div class="col-md-4 p-0 w-100 img-file"  style="border-left: 1px solid white; border-right: 1px solid white;">  
-		                          <img style="max-height: 250px;" class="img-fluid border-top-0 p-0 mw-100 img-replace" src="<?= BASE; ?>App/assets/img/account/places/<?= $value['url']; ?>" alt="<?= $listar['title']; ?>">  
+		                          <img style="min-height: 293px;" class="img-fluid border-top-0 p-0 mw-100 img-replace" src="<?= BASE; ?>App/assets/img/account/places/<?= $listar['img_slider'][$i]['url']; ?>" alt="<?= $listar['title']; ?>">  
 		                            
 			                        <div class="btn btn-block btn-file input-am p-0 border-0">
 				                        
 				                        <div class="form-group mb-0">
-										  <input class="input-file" data-index="<?= $key; ?>" data-id="<?= $value['id']; ?>" type="file" id="photo<?= $key; ?>" name="photo" >
-										  <label for="photo<?= $key; ?>" class="btn btn-tertiary js-labelFile">
-										    <i class="photo<?= $key; ?> icon fa "></i>
+										  <input class="input-file" data-index="<?= $i; ?>" data-id="<?= $listar['img_slider'][$i]['id']; ?>" type="file" id="photo<?= $i; ?>" name="photo" >
+										  <label for="photo<?= $i; ?>" class="btn btn-tertiary js-labelFile">
+										    <i class="photo<?= $i; ?> icon fa "></i>
 										    <span class="js-fileName">Change</span>
 										  </label>
 										  <!-- <input class="input-val" type="hidden" name="id_photo[]" value="<?// $value['id']; ?>"> -->
@@ -50,26 +61,29 @@
 						            </div>     			                        
 		                        </div>
 		              
-		                        <?php endforeach; ?>
+		                        <?php endfor; ?>
 
-		                        <?php for($i=5; $i < 11 - count($listar['img_slider']); $i++): ?>  
+		                      <?php if ($offset < 6): ?>  
+                            
+                          <?php for($a=0; $a < $offset; $a++): ?>  
                                       
                                 <div class="col-md-4 p-0 w-100 img-file"  style="border-left: 1px solid white; border-right: 1px solid white;">  
-		                          <img class="img-fluid border-top-0 p-0 mw-100" src="<?= BASE; ?>App/assets/img/account/places/no-image.jpg" alt="No Image">  
+		                          <img style="min-height: 293px;" class="img-fluid border-top-0 p-0 mw-100" src="<?= BASE; ?>App/assets/img/account/places/no-image.jpg" alt="No Image">  
 		                            
 			                        <div class="btn btn-block btn-file input-am p-0 border-0">
 				                        <div class="form-group mb-0">
-										  <input type="file" id="photo" class="input-file" name="photo[]">
-										  <label for="photo" class="btn btn-tertiary js-labelFile">
-										    <i class="photo<?= $key; ?> icon fa"></i>
+										  <input type="file" id="photo<?= $a.$a; ?>" class="input-file" name="insert" data-id-post="<?= $listar['id_post']; ?>">
+										  <label for="photo<?= $a.$a; ?>" class="btn btn-tertiary js-labelFile">
+										    <i class=" icon fa photo<?= $a.$a; ?>"></i>
 										    <span class="js-fileName">Change</span>
 										  </label>
-										  <input id="insert" type="hidden" name="insert" value="<?= $listar['id_post']; ?>">
+										 <!--  <input id="insert" type="hidden" name="insert"> -->
 										</div>				 			                            
 						            </div>     			                        
 		                        </div>  
 
-		                        <?php endfor; ?>  
+		                      <?php endfor; ?>  
+                            <?php endif ?> 
 		                   
 		                    </div> 
 		                </div>       

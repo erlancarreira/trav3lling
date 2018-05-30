@@ -395,9 +395,30 @@ public function getAll()
 
         $sql = "SELECT posts_pl.id, posts_pl.id_user FROM relations 
 
-        LEFT JOIN posts_pl ON id_user = relations.id_user_to 
+        LEFT JOIN posts_pl ON id_user = relations.id_user_to
         
-        WHERE relations.id_user_from = '".($_SESSION['user'])."' AND relations.id_post = posts_pl.id AND relations.status = 1 ORDER BY posts_pl.id_user";
+        WHERE relations.id_post = posts_pl.id AND relations.status = 1 ORDER BY posts_pl.id_user";
+
+        $sql = $this->db->query($sql);
+        
+        if($sql->rowCount() > 0) {
+
+            $array = $sql->fetchAll();
+            
+        }
+
+        return $array;  
+    }
+
+     public function getMySubs() 
+    {
+        $array = array();
+
+        $sql = "SELECT posts_pl.id, posts_pl.id_user FROM relations 
+
+        LEFT JOIN posts_pl ON id_user = relations.id_user_to
+        
+        WHERE relations.id_post = posts_pl.id AND relations.status = 1 ORDER BY posts_pl.id_user";
 
         $sql = $this->db->query($sql);
         
