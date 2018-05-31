@@ -12,6 +12,8 @@ No App encontra-se os prinpais arquivos da aplicação separado na estrutura MVC
 
 PASTA CONTROLLERS
 
+Classes que fazem o controle da aplicação. É como se fossem uma cola entre os modelos e as views. É geralmente nos controllers que a aplicação verifica se é um GET,POST, etc e toma as decisões sobre qual View mostrar, como processar os dados, etc.
+
 accountController.php -> Tudo que for sobre a page account vai ser definido aqui!	
 
 ajaxController.php	-> Todas as requisições ajax passa por aqui, está incluso o upload de imagens da page account/edit
@@ -44,5 +46,7 @@ PASTA LIB
 
 Aqui terá os arquivos auxiliares da aplicação.
 
-PASTA MODELS 
+PASTA MODELS
+
+Classes relacionadas a banco de dados e regras de negócio 
 
