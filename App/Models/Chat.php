@@ -16,7 +16,7 @@ class Chat extends Model {
 
      
 
-        var_dump($ids);
+        // var_dump($ids);
 
         foreach ($ids as $key => $value) {
        
